@@ -1,0 +1,80 @@
+{
+  "expo": {
+    "name": "Masti Video",
+    "slug": "masti-video",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "masti-video",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1a0500"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.mastivideo.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Masti Video needs camera access to record videos.",
+        "NSMicrophoneUsageDescription": "Masti Video needs microphone access to record video sound.",
+        "NSPhotoLibraryUsageDescription": "Masti Video needs photo library access to pick and save videos.",
+        "NSPhotoLibraryAddUsageDescription": "Masti Video needs permission to save videos to your library."
+      }
+    },
+    "android": {
+      "package": "com.mastivideo.android",
+      "versionCode": 1,
+      "googleServicesFile": "./google-services.json",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#1a0500"
+      },
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO",
+        "READ_MEDIA_VIDEO",
+        "READ_MEDIA_IMAGES"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/images/icon.png"
+    },
+    "plugins": [
+      [
+        "expo-router",
+        {
+          "origin": "https://replit.com/"
+        }
+      ],
+      "expo-font",
+      "expo-web-browser",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Masti Video needs camera access to record videos.",
+          "microphonePermission": "Masti Video needs microphone access to record video sound."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Masti Video needs photo library access to pick videos."
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Masti Video needs photo library access to save videos.",
+          "savePhotosPermission": "Masti Video needs permission to save videos to your library.",
+          "isAccessMediaLocationEnabled": false
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}

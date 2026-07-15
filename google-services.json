@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "175132980753",
+    "project_id": "masti-video-38e71",
+    "storage_bucket": "masti-video-38e71.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175132980753:android:a3f7e552d26066f47923b0",
+        "android_client_info": {
+          "package_name": "com.mastivideo.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "175132980753-t53ccu689gbhipdusvu117674iv50irr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAf6CxYSpuDUNhez5TqnxeW2i4FgElVbcI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "175132980753-t53ccu689gbhipdusvu117674iv50irr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175132980753:android:39a899e4a26ac67a7923b0",
+        "android_client_info": {
+          "package_name": "com.mastivideo.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "175132980753-t53ccu689gbhipdusvu117674iv50irr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAf6CxYSpuDUNhez5TqnxeW2i4FgElVbcI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "175132980753-t53ccu689gbhipdusvu117674iv50irr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
