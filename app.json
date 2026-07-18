@@ -84,6 +84,9 @@
     "extra": {
       "router": {
         "origin": "https://replit.com/"
+      },
+      "eas": {
+        "projectId": "60c8377e-1391-435c-ab06-cec99737b74f"
       }
     },
     "owner": "sura-bullet"
