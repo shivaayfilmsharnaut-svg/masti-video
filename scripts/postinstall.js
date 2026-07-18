@@ -1,22 +1,21 @@
 /**
  * postinstall.js — patches expo-firebase-core to be compatible with
  * modern expo-modules-core (Expo SDK 50+).
- *
- * expo-firebase-core@6.0.0 references ExportedModule / BasePackage /
- * ModuleRegistry which were removed from expo-modules-core. This script
- * replaces the incompatible Android Java files with stubs that compile
- * cleanly, while leaving the JS / web side of expo-firebase-recaptcha
- * fully functional.
  */
-const fs = require('fs');
-const path = require('path');
+try {
+  const fs = require('fs');
+  const path = require('path');
 
-const BASE = path.join(__dirname, '..', 'node_modules', 'expo-firebase-core');
-const ANDROID_SRC = path.join(BASE, 'android', 'src', 'main', 'java', 'expo', 'modules', 'firebase', 'core');
-const BUILD_GRADLE = path.join(BASE, 'android', 'build.gradle');
+  const BASE = path.join(__dirname, '..', 'node_modules', 'expo-firebase-core');
+  const ANDROID_SRC = path.join(BASE, 'android', 'src', 'main', 'java', 'expo', 'modules', 'firebase', 'core');
+  const BUILD_GRADLE = path.join(BASE, 'android', 'build.gradle');
 
-// ─── 1. Patch build.gradle ────────────────────────────────────────────────────
-if (fs.existsSync(BUILD_GRADLE)) {
+  if (!fs.existsSync(BUILD_GRADLE)) {
+    console.log('[postinstall] expo-firebase-core not found — skipping.');
+    process.exit(0);
+  }
+
+  // ─── 1. Patch build.gradle ─────────────────────────────────────────────────
   let content = fs.readFileSync(BUILD_GRADLE, 'utf8');
   const orig = content;
   content = content.replace(/\bclassifier\s*=\s*'sources'/g, "archiveClassifier = 'sources'");
@@ -32,18 +31,10 @@ if (fs.existsSync(BUILD_GRADLE)) {
     fs.writeFileSync(BUILD_GRADLE, content, 'utf8');
     console.log('[postinstall] expo-firebase-core: build.gradle patched.');
   }
-} else {
-  console.log('[postinstall] expo-firebase-core not found — skipping.');
-  process.exit(0);
-}
 
-// ─── 2. Stub broken Java source files ────────────────────────────────────────
-// These stubs compile with any version of expo-modules-core because they
-// remove the dependency on the long-removed ExportedModule / BasePackage API.
-
-const stubs = {
-  'FirebaseCoreModule.java': `\
-package expo.modules.firebase.core;
+  // ─── 2. Stub broken Java source files ──────────────────────────────────────
+  const stubs = {
+    'FirebaseCoreModule.java': `package expo.modules.firebase.core;
 
 import android.content.Context;
 
@@ -54,8 +45,7 @@ public class FirebaseCoreModule {
   public String getName() { return NAME; }
 }
 `,
-  'FirebaseCorePackage.java': `\
-package expo.modules.firebase.core;
+    'FirebaseCorePackage.java': `package expo.modules.firebase.core;
 
 import android.content.Context;
 import java.util.Collections;
@@ -71,22 +61,26 @@ public class FirebaseCorePackage {
   }
 }
 `,
-};
+  };
 
-if (!fs.existsSync(ANDROID_SRC)) {
-  console.log('[postinstall] expo-firebase-core Java src not found — skipping stub.');
-  process.exit(0);
-}
+  if (!fs.existsSync(ANDROID_SRC)) {
+    console.log('[postinstall] expo-firebase-core Java src not found — skipping stub.');
+    process.exit(0);
+  }
 
-for (const [filename, src] of Object.entries(stubs)) {
-  const filePath = path.join(ANDROID_SRC, filename);
-  if (fs.existsSync(filePath)) {
-    const existing = fs.readFileSync(filePath, 'utf8');
-    if (existing !== src) {
-      fs.writeFileSync(filePath, src, 'utf8');
-      console.log('[postinstall] expo-firebase-core: stubbed ' + filename);
+  for (const [filename, src] of Object.entries(stubs)) {
+    const filePath = path.join(ANDROID_SRC, filename);
+    if (fs.existsSync(filePath)) {
+      const existing = fs.readFileSync(filePath, 'utf8');
+      if (existing !== src) {
+        fs.writeFileSync(filePath, src, 'utf8');
+        console.log('[postinstall] expo-firebase-core: stubbed ' + filename);
+      }
     }
   }
-}
 
-console.log('[postinstall] expo-firebase-core patches applied.');
+  console.log('[postinstall] expo-firebase-core patches applied.');
+} catch (err) {
+  console.warn('[postinstall] Warning: patch failed (non-fatal):', err.message);
+  // Do NOT exit with non-zero — let the install succeed
+}
