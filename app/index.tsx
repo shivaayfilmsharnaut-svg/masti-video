@@ -364,6 +364,7 @@ const LONG_PRESS_THRESHOLD = 300; // ms — below this on release = "tap"
   const [searchQuery, setSearchQuery] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [authLoading, setAuthLoading] = useState(true);
   const [showLoginSheet, setShowLoginSheet] = useState(false);
   const pendingActionRef = useRef<(() => void) | null>(null);
   const [videos, setVideos] = useState(DUMMY_VIDEOS);
@@ -729,18 +730,22 @@ useEffect(() => {
   }, [permission]);
   
   const requireAuth = useCallback((action: () => void) => {
+    if (authLoading) return; // Firebase abhi check kar raha hai — wait karo
     if (isLoggedIn) {
       action();
     } else {
       pendingActionRef.current = action;
       setShowLoginSheet(true);
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, authLoading]);
 
-  // Firebase auth state listener — sets isLoggedIn whenever Firebase user changes
+  // Firebase auth state listener — sets isLoggedIn whenever Firebase user changes.
+  // authLoading stays true until Firebase confirms whether a saved session exists,
+  // preventing a flash of the login screen on every app open.
   useEffect(() => {
     const unsub = onAuthStateChanged(firebaseAuth, (user) => {
       setIsLoggedIn(!!user);
+      setAuthLoading(false);
     });
     return () => unsub();
   }, []);
