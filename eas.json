@@ -20,7 +20,6 @@
     },
     "preview": {
       "distribution": "internal",
-      "platforms": ["android"],
       "android": {
         "buildType": "apk"
       },
@@ -28,19 +27,8 @@
         "EXPO_PUBLIC_DOMAIN": "replit.com"
       }
     },
-    "preview-ios": {
-      "distribution": "internal",
-      "platforms": ["ios"],
-      "ios": {
-        "credentialsSource": "remote"
-      },
-      "env": {
-        "EXPO_PUBLIC_DOMAIN": "replit.com"
-      }
-    },
     "production": {
       "autoIncrement": true,
-      "platforms": ["android", "ios"],
       "android": {
         "buildType": "app-bundle"
       },
