@@ -1,0 +1,94 @@
+{
+  "expo": {
+    "name": "Masti Video",
+    "slug": "masti-video",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "masti-video",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#DC0000"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.mastivideo.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Masti Video needs access to your Camera to record videos.",
+        "NSMicrophoneUsageDescription": "Masti Video needs access to your Microphone to record audio.",
+        "NSPhotoLibraryUsageDescription": "Masti Video needs access to your Photo Library to save and load videos.",
+        "NSPhotoLibraryAddUsageDescription": "Masti Video needs permission to save videos to your Photo Library."
+      }
+    },
+    "android": {
+      "package": "com.mastivideo.app",
+      "googleServicesFile": "./google-services.json",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#DC0000"
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.READ_MEDIA_VIDEO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_VISUAL_USER_SELECTED",
+        "android.permission.ACCESS_MEDIA_LOCATION",
+        "android.permission.READ_MEDIA_AUDIO"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/images/icon.png"
+    },
+    "plugins": [
+      [
+        "expo-router",
+        {
+          "origin": "https://replit.com/"
+        }
+      ],
+      "expo-font",
+      "expo-web-browser",
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "Masti Video needs access to your Camera to record videos.",
+          "enableMicrophonePermission": true,
+          "microphonePermissionText": "Masti Video needs access to your Microphone to record audio."
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow Masti Video to access your photos.",
+          "savePhotosPermission": "Allow Masti Video to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Masti Video needs access to your photo library to upload videos."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "extra": {
+      "router": {
+        "origin": "https://replit.com/"
+      },
+      "eas": {
+        "projectId": "d6dd6d39-75e3-4bc2-9018-5034205a0355"
+      }
+    },
+    "owner": "suraj44"
+  }
+}
