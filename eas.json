@@ -11,15 +11,13 @@
         "buildType": "apk",
         "gradleCommand": ":app:assembleDebug"
       },
-      "ios": {
-        "simulator": false
-      },
       "env": {
         "EXPO_PUBLIC_DOMAIN": "replit.com"
       }
     },
     "preview": {
       "distribution": "internal",
+      "platforms": ["android"],
       "android": {
         "buildType": "apk"
       },
@@ -29,6 +27,7 @@
     },
     "production": {
       "autoIncrement": true,
+      "platforms": ["android"],
       "android": {
         "buildType": "app-bundle"
       },
